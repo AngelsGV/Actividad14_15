@@ -2,22 +2,49 @@
 // excepto la fecha de contratación que la generará el sistema
 // (con la fecha de introducción de datos) y los inserte en la BD
 import java.sql.*;
+import java.time.format.DateTimeFormatter;
+import java.util.Scanner;
+import java.time.*;
 public class Main {
     public static void main(String[] args){
         //Declaramos las variables
+        Scanner sc =new Scanner(System.in); //porque vamos a introducir los datos del nuevo empleado
         Connection con ;
-        Statement sentencia;
-        ResultSet rs;
+        PreparedStatement sentencia;
+        //ResultSet rs; --> sql select
         String sql;
 
         String url = "jdbc:mysql://localhost/Empresa";
 
         try{
             con = DriverManager.getConnection(url, "Pepe","12345"); //Cosas para que la conexión sea ok
+
+           //Pedir datos empleado nuevo
+            System.out.println("Vamos a insertar un empleado nuevo en la BD.");
+            System.out.println("Introduzca el nombre: ");
+            String nombre = sc.nextLine();
+            System.out.println("Introduzca el número de empleado: ");
+            int numemp = sc.nextInt();
+            sc.nextLine();
+            System.out.println("Introduzca la edad: ");
+            int edad = sc.nextInt();
+            sc.nextLine(); // Limpiar el buffer,
+            // poner siempre después de nextInt,double, long para evitar errores al seguirintroduciendo datos.
+
+            System.out.println("Introduzca el puesto: ");
+            String puesto = sc.nextLine();
+            System.out.println("Introduzca el númeor de la oficina: ");
+            int oficina = sc.nextInt();
+            sc.nextLine();
+            System.out.println("La fecha del contrato será la fecha que se introducen los datos.");
+            //Crear la fecha de contrato -->TEMA 1
+            LocalDate fechaContrato = LocalDate.now();
+
+
             sentencia = con.createStatement();//creamos la conexión
-            sql = "SELECT * FROM Empleados";
-            // He decidido que para saber el empleado es necesario saber el nombre y
-            // el número de empleado, para que no hayan dudas
+            sql = "INSERT INTO Empleados (numemp, nombre, edad, oficina, puesto, fechaContrato) VALUES (?, ?, ?, ?, ?, ?)";
+
+
             rs = sentencia.executeQuery(sql);//para sacar los resultados
             System.out.println("Lista de empleados: ");
 
