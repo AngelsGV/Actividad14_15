@@ -32,7 +32,7 @@ public class Main {
 
             System.out.println("Introduzca el puesto: ");
             String puesto = sc.nextLine();
-            System.out.println("Introduzca el númeor de la oficina: ");
+            System.out.println("Introduzca el número de la oficina: ");
             int oficina = sc.nextInt();
             sc.nextLine();
             System.out.println("La fecha del contrato será la fecha que se introducen los datos.");
