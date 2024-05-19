@@ -50,6 +50,7 @@ public class Main {
             sentencia.setString(5, puesto); //En BD data yyyy-mm-dd
             sentencia.setString(6, fechaContrato.toString());
             sentencia.executeUpdate();//RESUELTO 14.10
+            System.out.println("Se ha registrado empleado correctamente.");
 
 
         }catch (SQLException EX){
